@@ -5,17 +5,18 @@ public class Animal
     private String id, nombre;
     private double peso; 
     public Fecha fechaNacimiento;
+    private String tipoAnimal;
     private Tipo tipo;
 
     public Animal() {
     }
 
-    public Animal(String id, String nombre, double peso, Fecha fechaNacimiento, String tipoAnimal) {
+    public Animal(String id, String nombre, double peso, Fecha fechaNacimiento, Tipo tipo) {
         this.id = id;
         this.nombre = nombre;
         this.peso = peso;
         this.fechaNacimiento = fechaNacimiento;
-        this.tipoAnimal = tipoAnimal;
+        this.tipo = tipo;
     }
 
     public String getId() {
@@ -50,18 +51,13 @@ public class Animal
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getTipoAnimal() {
-        return tipoAnimal;
+    public Tipo getTipo() {
+        return tipo;
     }
 
-    public void setTipoAnimal(String tipoAnimal) {
-        this.tipoAnimal = tipoAnimal;
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
-    
-    public abstract int calcularEdad ();
-    
-    
-    
     
     
 }
