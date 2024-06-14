@@ -1,0 +1,227 @@
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import java.time.LocalDate;
+import javafx.collections.FXCollections;
+
+
+public class Controlador  {
+    
+    private Animal animal;
+    private Granja granja; 
+    private String nombre, id;
+    private double peso;
+    private Tipo tipo; 
+    
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private Button btnCalcular;
+
+    @FXML
+    private Button btnRegistrar;
+
+    @FXML
+    private ChoiceBox<?> chboxSeleccionar;
+
+    @FXML
+    private ChoiceBox<Tipo> chboxTipo;
+
+    @FXML
+    private DatePicker dateFechaA;
+
+    @FXML
+    private DatePicker dateFechaN;
+
+    @FXML
+    private Label lblCantidadC;
+
+    @FXML
+    private Label lblCantidadG;
+
+    @FXML
+    private Label lblCantidadV;
+
+    @FXML
+    private Label lblFechaA;
+
+    @FXML
+    private Label lblFechaN;
+
+    @FXML
+    private Label lblGranja;
+
+    @FXML
+    private Label lblId;
+
+    @FXML
+    private Label lblNombre;
+
+    @FXML
+    private Label lblPeso;
+
+    @FXML
+    private Label lblSeleccionar;
+
+    @FXML
+    private Label lblTipo;
+
+    @FXML
+    private TextField txtCantidadC;
+
+    @FXML
+    private TextField txtCantidadG;
+
+    @FXML
+    private TextField txtCantidadV;
+
+    @FXML
+    private TextField txtId;
+
+    @FXML
+    private TextField txtNombre;
+
+    @FXML
+    private TextField txtPeso;
+    
+    public Controlador (){
+        this.granja = new Granja ();
+    }
+    
+    
+
+    @FXML
+    void calcularEdad(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cantidadCIn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cantidadGIn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cantidadVIn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fActualIn(ActionEvent event) {
+        LocalDate fechaActual = dateFechaA.getValue();
+
+    }
+
+    @FXML
+    void fechaIn(ActionEvent event) {
+        LocalDate fechaSeleccionada = dateFechaN.getValue();
+        
+
+    }
+
+    @FXML
+    void idIn(ActionEvent event) {
+        id = txtId.getText();
+
+    }
+
+    @FXML
+    void nombreIn(ActionEvent event) {
+        nombre = txtNombre.getText();
+        
+
+    }
+
+    @FXML
+    void pesoIn(ActionEvent event) {
+        peso = Double.parseDouble(txtPeso.getText());
+
+    }
+
+    @FXML
+    void registrarAnimal(ActionEvent event) {
+        try {
+            String nombre = txtNombre.getText();
+            String id = txtId.getText();
+            double peso = Double.parseDouble(txtPeso.getText());
+            LocalDate fechaNacimiento = dateFechaN.getValue();
+            Tipo tipo = chboxTipo.getValue();
+            
+            if(nombre.isEmpty() || peso <= 0 || id.isEmpty() || fechaNacimiento == null){
+                System.out.println ("Por favor, complete todos los campos");
+                return;
+            }
+            Animal nuevoAnimal = new Animal (nombre, id, peso, fechaNacimiento, tipo);
+            granja.registrarAnimal(nuevoAnimal);
+            
+            //limpiar los campos de texto
+            txtNombre.clear();
+            txtId.clear();
+            txtPeso.clear();
+            dateFechaN.setValue(null);
+            chboxTipo.getSelectionModel().selectFirst();
+            
+        }
+        catch (NumberFormatException e){
+            System.out.println ("Por favor ingrese datos válidos.");
+        }
+        }
+
+    
+    
+    public void startGUI(){
+        txtId.setText(animal.getId());
+        txtNombre.setText(animal.getNombre());
+        txtPeso.setText(String.valueOf(animal.getPeso()));
+        dateFechaN.setValue(animal.getFechaNacimiento());
+        chboxTipo.setValue(animal.getTipo());
+        
+        
+        
+    }
+
+    @FXML
+    void initialize() {
+        assert btnCalcular != null : "fx:id=\"btnCalcular\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert btnRegistrar != null : "fx:id=\"btnRegistrar\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert chboxSeleccionar != null : "fx:id=\"chboxSeleccionar\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert chboxTipo != null : "fx:id=\"chboxTipo\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert dateFechaA != null : "fx:id=\"dateFechaA\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert dateFechaN != null : "fx:id=\"dateFechaN\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblCantidadC != null : "fx:id=\"lblCantidadC\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblCantidadG != null : "fx:id=\"lblCantidadG\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblCantidadV != null : "fx:id=\"lblCantidadV\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblFechaA != null : "fx:id=\"lblFechaA\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblFechaN != null : "fx:id=\"lblFechaN\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblGranja != null : "fx:id=\"lblGranja\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblId != null : "fx:id=\"lblId\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblNombre != null : "fx:id=\"lblNombre\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblPeso != null : "fx:id=\"lblPeso\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblSeleccionar != null : "fx:id=\"lblSeleccionar\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert lblTipo != null : "fx:id=\"lblTipo\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert txtCantidadC != null : "fx:id=\"txtCantidadC\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert txtCantidadG != null : "fx:id=\"txtCantidadG\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert txtCantidadV != null : "fx:id=\"txtCantidadV\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert txtId != null : "fx:id=\"txtId\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert txtNombre != null : "fx:id=\"txtNombre\" was not injected: check your FXML file 'Granja.fxml'.";
+        assert txtPeso != null : "fx:id=\"txtPeso\" was not injected: check your FXML file 'Granja.fxml'.";
+         chboxTipo.setItems(FXCollections.observableArrayList(Tipo.values()));
+
+    }
+
+}
