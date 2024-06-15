@@ -33,7 +33,7 @@ public class Controlador  {
     private Button btnRegistrar;
 
     @FXML
-    private ChoiceBox<?> chboxSeleccionar;
+    private ChoiceBox<Animal> chboxSeleccionar;
 
     @FXML
     private ChoiceBox<Tipo> chboxTipo;
@@ -169,11 +169,16 @@ public class Controlador  {
             Animal nuevoAnimal = new Animal (nombre, id, peso, fechaNacimiento, tipo);
             granja.registrarAnimal(nuevoAnimal);
             
+            //actualizar la chbox de animales con cada nuevo que se registre
+            chboxSeleccionar.setItems(FXCollections.observableArrayList(granja.getAnimales()));
+
+            
             //limpiar los campos de texto
             txtNombre.clear();
             txtId.clear();
             txtPeso.clear();
             dateFechaN.setValue(null);
+            dateFechaA.setValue(LocalDate.now());
             chboxTipo.getSelectionModel().selectFirst();
             
         }
