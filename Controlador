@@ -18,6 +18,7 @@ public class Controlador  {
     private String nombre, id;
     private double peso;
     private Tipo tipo; 
+    private int contadorGallinas, contadorCerdos, contadorVacas; 
     
 
     @FXML
@@ -97,13 +98,16 @@ public class Controlador  {
     
     public Controlador (){
         this.granja = new Granja ();
+        this.contadorVacas = 0;
+        this.contadorGallinas = 0;
+        this.contadorCerdos = 0;
     }
     
     
 
     @FXML
     void calcularEdad(ActionEvent event) {
-
+       
     }
 
     @FXML
@@ -169,6 +173,22 @@ public class Controlador  {
             Animal nuevoAnimal = new Animal (nombre, id, peso, fechaNacimiento, tipo);
             granja.registrarAnimal(nuevoAnimal);
             
+            //contadores 
+            switch (tipo) {
+                case VACA: 
+                    contadorVacas++;
+                    break;
+                    case GALLINA:
+                    contadorGallinas++;
+                    break; 
+                    case CERDO:
+                        contadorCerdos++;
+                        break; 
+                    }
+                
+                    actualizarContadores();
+            
+            
             //actualizar la chbox de animales con cada nuevo que se registre
             chboxSeleccionar.setItems(FXCollections.observableArrayList(granja.getAnimales()));
 
@@ -186,6 +206,12 @@ public class Controlador  {
             System.out.println ("Por favor ingrese datos válidos.");
         }
         }
+        
+    private void actualizarContadores (){
+        txtCantidadV.setText(String.valueOf(contadorVacas));
+        txtCantidadC.setText(String.valueOf(contadorCerdos));
+        txtCantidadG.setText(String.valueOf(contadorGallinas));
+    }
 
     
     
